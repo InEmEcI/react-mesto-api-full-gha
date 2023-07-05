@@ -41,6 +41,7 @@ class Auth {
   }
 }
 
-const auth = new Auth("https://auth.nomoreparties.co");
+// const auth = new Auth("https://auth.nomoreparties.co");
+const auth = new Auth("https://localhost:3033");
 
 export default auth;
