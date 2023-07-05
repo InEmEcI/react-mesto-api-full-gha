@@ -1,0 +1,19 @@
+{
+  "name": "react-mesto-api-full-gha",
+  "version": "1.0.0",
+  "description": "[![Статус тестов](../../actions/workflows/tests.yml/badge.svg)](../../actions/workflows/tests.yml)",
+  "main": "app.js",
+  "scripts": {
+    "test": "\"test\": \"react-scripts test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InEmEcI/react-mesto-api-full-gha.git"
+  },
+  "author": "Iliya Karnyukhin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InEmEcI/react-mesto-api-full-gha/issues"
+  },
+  "homepage": "https://github.com/InEmEcI/react-mesto-api-full-gha#readme"
+}
