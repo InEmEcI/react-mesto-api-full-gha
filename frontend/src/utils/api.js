@@ -13,16 +13,9 @@ class Api {
     };
   }
 
-  // getCards() {
-  //   return fetch(this._url + `/cards/`, {
-  //     method: "GET",
-  //     headers: this._headers,
-  //   }).then(this._checkError());
-  // }
-
   getCards() {
     const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/`, {
+    return fetch(this._url + `/cards`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -32,7 +25,7 @@ class Api {
 
   getUser() {
     const token = localStorage.getItem("token");
-    return fetch(this._url + `/users/me/`, {
+    return fetch(this._url + `/users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +36,7 @@ class Api {
 
   editUserInfo(info) {
     const token = localStorage.getItem("token");
-    return fetch(this._url + `/users/me/`, {
+    return fetch(this._url + `/users/me`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +51,7 @@ class Api {
 
   changeUserAvatar(data) {
     const token = localStorage.getItem("token");
-    return fetch(this._url + `/users/me/avatar/`, {
+    return fetch(this._url + `/users/me/avatar`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +65,7 @@ class Api {
 
   addNewCard(data) {
     const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/`, {
+    return fetch(this._url + `/cards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +91,7 @@ class Api {
 
   likeCard(cardId) {
     const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/` + cardId + `/likes/`, {
+    return fetch(this._url + `/cards/` + cardId + `/likes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -128,11 +121,8 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://api.nemec.nomoreparties.sbs",
-  // headers: {
-  //   authorization: "",
-  //   "Content-Type": "application/json",
-  // },
+  // url: "https://api.nemec.nomoreparties.sbs", 
+  url: "http://localhost:3000",
 });
 
 // const api = new Api({

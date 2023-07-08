@@ -115,19 +115,10 @@ function App() {
 
   useEffect(() => {
     if (isLoginIn) {
-      api
-        .getUser()
-        .then(setCurrentUser)
-        .catch((error) => console.log(`Ошибка: ${error}`));
-    }
-  }, [isLoginIn]);
-
-  useEffect(() => {
-    if (isLoginIn) {
-      api
-        .getCards()
-        .then((cards) => {
-          setCards(cards.reverse());
+      Promise.all([api.getUser(), api.getCards()])
+        .then(([userInfo, cardInfo]) => {
+          setCards(cardInfo.reverse());
+          setCurrentUser(userInfo);
         })
         .catch((error) => console.log(`Ошибка: ${error}`));
     }
