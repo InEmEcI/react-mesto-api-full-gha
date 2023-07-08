@@ -4,10 +4,10 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function Card({ data, onCardClick, onLikeClick, onDeleteClick }) {
   const currentUser = useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = data.owner._id === currentUser._id;
+  const isOwn = data.owner === currentUser._id;
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = data.likes.some((i) => i._id === currentUser._id);
+  const isLiked = data.likes.some((i) => i === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__like ${

@@ -8,7 +8,8 @@ const Card = require('../models/card');
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
+    // .then((cards) => res.status(200).send(cards.map()))
     .catch(next);
 };
 
@@ -16,7 +17,7 @@ const createCard = (req, res, next) => {
   const bodyCard = { ...req.body, owner: req.user._id };
   Card.create(bodyCard)
     .then((card) => {
-      res.status(201).send({ data: card });
+      res.status(201).send(card);
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {
@@ -36,7 +37,7 @@ const deleteCardById = (req, res, next) => {
         throw new FORBIDDEN_ERROR('Нельзя удалить чужую карточку');
       }
       Card.findByIdAndRemove(req.params._id)
-        .then((user) => res.send({ data: user }))
+        .then((user) => res.send(user))
         .catch((error) => {
           if (error.name === 'CastError') {
             throw new ERROR_CODE('ID неверный');
@@ -59,7 +60,7 @@ const likeCard = (req, res, next) => {
       if (!card) {
         throw new NOT_FOUND_ERROR('Запрашиваемая карточка не найдена');
       } else {
-        res.status(200).send({ data: card });
+        res.status(200).send(card);
       }
     })
     .catch((error) => {
@@ -84,7 +85,7 @@ const dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NOT_FOUND_ERROR('Запрашиваемая карточка не найдена');
       } else {
-        res.send({ data: card });
+        res.send(card);
       }
     })
     .catch((error) => {

@@ -22,7 +22,7 @@ const getUserById = (req, res, next) => {
       if (!userInfo) {
         throw new NOT_FOUND_ERROR('Запрашиваемый пользователь не найден');
       }
-      res.send({ data: userInfo });
+      res.send(userInfo);
     })
     .catch(next);
 };
@@ -95,7 +95,7 @@ const updateUser = (req, res, next) => {
       if (!userInfo) {
         return next(new ERROR_CODE('Запрашиваемый пользователь не найден'));
       }
-      res.send({ data: userInfo });
+      res.send(userInfo);
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {
@@ -115,7 +115,7 @@ const updateAvatar = (req, res, next) => {
           new NOT_FOUND_ERROR('Запрашиваемый пользователь не найден'),
         );
       }
-      res.send({ data: userInfo });
+      res.send(userInfo);
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {

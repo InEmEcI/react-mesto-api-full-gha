@@ -106,12 +106,11 @@ function App() {
         .checkToken(token)
         .then((res) => {
           setIsLoginIn(true);
-          setEmail(res.data.email);
+          setEmail(res.email);
           navigate("/");
         })
         .catch(console.error);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -128,7 +127,7 @@ function App() {
       api
         .getCards()
         .then((cards) => {
-          setCards(cards);
+          setCards(cards.reverse());
         })
         .catch((error) => console.log(`Ошибка: ${error}`));
     }
@@ -136,7 +135,7 @@ function App() {
 
   function handleCardLike(data) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = data.likes.some((i) => i._id === currentUser._id);
+    const isLiked = data.likes.some((i) => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api

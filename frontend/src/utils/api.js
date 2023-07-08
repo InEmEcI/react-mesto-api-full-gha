@@ -13,24 +13,42 @@ class Api {
     };
   }
 
+  // getCards() {
+  //   return fetch(this._url + `/cards/`, {
+  //     method: "GET",
+  //     headers: this._headers,
+  //   }).then(this._checkError());
+  // }
+
   getCards() {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/cards/`, {
-      method: "GET",
-      headers: this._headers,
-    }).then(this._checkError());
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkError());    
   }
 
   getUser() {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/users/me/`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this._checkError());
   }
 
   editUserInfo(info) {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/users/me/`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: info.name,
         about: info.about,
@@ -39,9 +57,13 @@ class Api {
   }
 
   changeUserAvatar(data) {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/users/me/avatar/`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -49,9 +71,13 @@ class Api {
   }
 
   addNewCard(data) {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/cards/`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -60,23 +86,35 @@ class Api {
   }
 
   removeCard(cardId) {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/cards/` + cardId, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this._checkError());
   }
 
   likeCard(cardId) {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/cards/` + cardId + `/likes/`, {
       method: "PUT",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this._checkError());
   }
 
   dislikeCard(cardId) {
+    const token = localStorage.getItem("token");
     return fetch(this._url + `/cards/` + cardId + `/likes`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this._checkError());
   }
 
@@ -90,11 +128,19 @@ class Api {
 }
 
 const api = new Api({
-  url: "http://localhost:3000",
-  headers: {
-    authorization: "186e858b-0f86-414d-8c8c-a1408bf9b14d",
-    "Content-Type": "application/json",
-  },
+  url: "https://api.nemec.nomoreparties.sbs",
+  // headers: {
+  //   authorization: "",
+  //   "Content-Type": "application/json",
+  // },
 });
+
+// const api = new Api({
+//   url: "http://localhost:3000",
+//   headers: {
+//     authorization: "186e858b-0f86-414d-8c8c-a1408bf9b14d",
+//     "Content-Type": "application/json",
+//   },
+// });
 
 export default api;
