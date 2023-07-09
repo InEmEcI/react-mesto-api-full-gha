@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const ERROR_CODE = require('../utils/errors/ErrorCode');
 const NOT_FOUND_ERROR = require('../utils/errors/NotFoundError');
 const CONFLICTING_REQUEST_ERROR = require('../utils/errors/ConflictingRequestError');
@@ -63,7 +65,7 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-key', {
         expiresIn: '7d',
       });
 
