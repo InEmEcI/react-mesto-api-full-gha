@@ -21,32 +21,32 @@ class Api {
   // }
 
   getCards() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     return fetch(`${this._address}/cards`, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }).then(this._handleResponse);
   }
 
   getUser() {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/users/me/`, {
-      method: "GET",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/users/me/`, {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }).then(this._checkError());
   }
 
   editUserInfo(info) {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/users/me/`, {
-      method: "PATCH",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/users/me/`, {
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -57,11 +57,11 @@ class Api {
   }
 
   changeUserAvatar(data) {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/users/me/avatar/`, {
-      method: "PATCH",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/users/me/avatar/`, {
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -71,11 +71,11 @@ class Api {
   }
 
   addNewCard(data) {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/`, {
-      method: "POST",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/cards/`, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -86,33 +86,33 @@ class Api {
   }
 
   removeCard(cardId) {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/` + cardId, {
-      method: "DELETE",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }).then(this._checkError());
   }
 
   likeCard(cardId) {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/` + cardId + `/likes/`, {
-      method: "PUT",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/cards/${cardId}/likes/`, {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }).then(this._checkError());
   }
 
   dislikeCard(cardId) {
-    const token = localStorage.getItem("token");
-    return fetch(this._url + `/cards/` + cardId + `/likes`, {
-      method: "DELETE",
+    const token = localStorage.getItem('token');
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }).then(this._checkError());
@@ -121,14 +121,13 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     if (!isLiked) {
       return this.dislikeCard(cardId);
-    } else {
-      return this.likeCard(cardId);
     }
+    return this.likeCard(cardId);
   }
 }
 
 const api = new Api({
-  url: "http://localhost:3000",
+  url: 'http://localhost:3000',
   // headers: {
   //   authorization: "",
   //   "Content-Type": "application/json",

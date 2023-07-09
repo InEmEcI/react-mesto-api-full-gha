@@ -11,36 +11,36 @@ class Auth {
   }
 
   authorization({ email, password }) {
-    return fetch(this._baseUrl + "/signin", {
-      method: "POST",
+    return fetch(`${this._baseUrl}/signin`, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
     }).then((res) => this._checkError(res));
   }
 
   registration({ email, password }) {
-    return fetch(this._baseUrl + "/signup", {
-      method: "POST",
+    return fetch(`${this._baseUrl}/signup`, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
     }).then((res) => this._checkError(res));
   }
 
   checkToken(token) {
-    return fetch(this._baseUrl + "/users/me", {
-      method: "GET",
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => this._checkError(res));
   }
 }
 
-const auth = new Auth("http://localhost:3000");
+const auth = new Auth('http://localhost:3000');
 
 export default auth;
