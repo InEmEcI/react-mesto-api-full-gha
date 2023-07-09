@@ -9,7 +9,6 @@ const Card = require('../models/card');
 const getCards = (req, res, next) => {
   Card.find({})
     .then((card) => res.send(card))
-    // .then((cards) => res.status(200).send(cards.map()))
     .catch(next);
 };
 

@@ -121,16 +121,8 @@ class Api {
 }
 
 const api = new Api({
-  // url: "https://api.nemec.nomoreparties.sbs", 
-  url: "http://localhost:3000",
+  url: "https://api.nemec.nomoreparties.sbs", 
+  // url: "http://localhost:3000",
 });
-
-// const api = new Api({
-//   url: "http://localhost:3000",
-//   headers: {
-//     authorization: "186e858b-0f86-414d-8c8c-a1408bf9b14d",
-//     "Content-Type": "application/json",
-//   },
-// });
 
 export default api;

@@ -11,6 +11,6 @@
 
 IP-адрес 158.160.111.181
 
-Frontend https://...
+Frontend https://nemec.nomoreparties.sbs/
 
-Backend https://...
+Backend https://api.nemec.nomoreparties.sbs/
