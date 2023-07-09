@@ -3,10 +3,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
+
+app.use(requestLogger); // подключаем логгер запросов
 
 const router = require('./routes/index');
 
