@@ -19,8 +19,9 @@ router.use(auth);
 router.use(userRoutes);
 router.use(cardRoutes);
 
-router.use('/', () => {
-  throw new NOT_FOUND_ERROR('Страница не найдена');
+router.use('/', (next) => {
+  // throw new NOT_FOUND_ERROR('Страница не найдена');
+  next(new NOT_FOUND_ERROR('Страница не найдена'));
 });
 
 module.exports = router;
