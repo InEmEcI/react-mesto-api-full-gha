@@ -9,8 +9,8 @@ const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    // throw new UNAUTHORIZED_ERROR('Необходима авторизация');
-    return next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
+    throw new UNAUTHORIZED_ERROR('Необходима авторизация');
+    // return next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -22,8 +22,8 @@ const auth = (req, res, next) => {
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-key',
     );
   } catch (err) {
-    // next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
-    return next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
+    next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
+    // return next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
   }
 
   req.user = payload;
