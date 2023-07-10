@@ -37,8 +37,14 @@ const deleteCardById = (req, res, next) => {
       }
       Card.findByIdAndRemove(req.params._id)
         .then((user) => res.send(user))
-        .catch(next);
-    });
+        .catch((error) => {
+          if (error.name === 'CastError') {
+            throw new ERROR_CODE('ID неверный');
+          }
+          return next(error);
+        });
+    })
+    .catch(next);
 };
 
 const likeCard = (req, res, next) => {
@@ -61,7 +67,8 @@ const likeCard = (req, res, next) => {
         return next(new ERROR_CODE('ID неверный'));
       }
       return next(error);
-    });
+    })
+    .catch(next);
 };
 
 const dislikeCard = (req, res, next) => {
@@ -85,7 +92,8 @@ const dislikeCard = (req, res, next) => {
         return next(new ERROR_CODE('ID неверный'));
       }
       return next(error);
-    });
+    })
+    .catch(next);
 };
 
 module.exports = {

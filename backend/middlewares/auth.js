@@ -10,7 +10,6 @@ const auth = (req, res, next) => {
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     throw new UNAUTHORIZED_ERROR('Необходима авторизация');
-    // return next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -23,12 +22,11 @@ const auth = (req, res, next) => {
     );
   } catch (err) {
     next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
-    // return next(new UNAUTHORIZED_ERROR('Необходима авторизация'));
   }
 
   req.user = payload;
 
-  return next();
+  next();
 };
 
 module.exports = auth;
