@@ -92,8 +92,7 @@ const dislikeCard = (req, res, next) => {
         return next(new ERROR_CODE('ID неверный'));
       }
       return next(error);
-    })
-    .catch(next);
+    });
 };
 
 module.exports = {
